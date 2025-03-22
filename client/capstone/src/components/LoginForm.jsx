@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function LoginForm() {
   return (
@@ -7,20 +8,34 @@ function LoginForm() {
         <form action="">
           <div className="mb-3">
             <label htmlFor="email">Email</label>
-            <input type="email" placehollder="Enter Email" />
+            <input
+              type="email"
+              placehollder="Enter Email"
+              className="form-control rounded-0"
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="email">Password</label>
-            <input type="email" placehollder="Enter Password" />
+            <input
+              type="email"
+              placehollder="Enter Password"
+              className="form-control rounded-0"
+            />
           </div>
-          <button className="btn btn-sucess">Log in </button>
-          <p></p>
-          <button className="btn btn-default border">Create Account </button>
+          <button className="btn btn-success w-100">Log in </button>
+          <p> </p>
+          <Link
+            to="/Signup"
+            className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
+          >
+            Create Account{" "}
+          </Link>
         </form>
       </div>
     </div>
   );
 }
+
 //   const [userEmail, setUserEmail] = useState("");
 //   const [userPassword, setUserPassword] = useState("");
 //   const [submitResult, setSubmitResult] = useState("");

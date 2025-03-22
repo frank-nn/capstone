@@ -1,13 +1,11 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import reactLogo from "./assets/icons8-logo.svg";
 import "./App.css";
-import LoginForm from "./components/LoginForm";
-import "bootstrap/dist/css/bootstrap.min.css";
+import LoginForm from "./components/LoginForm.jsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignUp from "./components/Signup.jsx";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <div>
@@ -16,8 +14,13 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>FRANkBOOK</h1>
-      <LoginForm />
+      <h1 className="title">FRANkBOOK</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LoginForm />}></Route>
+          <Route path="/Signup" element={<SignUp />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
