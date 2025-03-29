@@ -17,6 +17,15 @@ function LoginForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors(Validation(values));
+    if (errors.email === "" && errors.password === "") {
+      axios
+        .post("http://localhost:8080/login", values)
+        .then((res) => {
+          if (res.data === "Success") {
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
