@@ -35,7 +35,7 @@ function LoginForm() {
           if (res.data === "Success") {
             navigate("home"); // Navigate to the home page on success
           } else {
-            alert("No record existed");
+            alert("Email or Password Incorrect");
           }
         })
         .catch((err) => {
