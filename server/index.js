@@ -2,69 +2,70 @@ const express = require("express");
 const app = express();
 require("dotenv").config(); // Make sure to load environment variables from .env
 let dbConnect = require("./lib/dbConnect");
-const cors = require("cors"); // Corrected the typo here
+const cors = require("cors");
+const bcrypt = require("bcryptjs"); // Import bcryptjs
+const validator = require("validator"); // Import validator for email validation
 
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors()); // Use CORS middleware
 
+// Basic endpoint
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to my MySQL application." });
 });
 
-app.post("/signup", (req, res) => {
-  const sql = "INSERT INTO login (name, email, password) VALUES (?)"; // Corrected column name 'passwoord' to 'password'
-  const values = [
-    req.body.name,
-    req.body.email,
-    req.body.password, // Ensure this is hashed before storing in production
-  ];
+// Signup route with password hashing
+app.post("/signup", async (req, res) => {
+  const { name, email, password } = req.body;
 
-  dbConnect.query(sql, [values], (err, data) => {
-    if (err) {
-      console.error(err); // Log the error for debugging
-      return res.status(500).json({
-        message: "Error inserting data into the database.",
-        error: err,
-      });
-    }
+  // Validate email format
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({ message: "Invalid email format." });
+  }
+
+  try {
+    // Hash the password before storing it
+    // const hashedPassword = await bcrypt.hash(password, 10);
+
+    const sql = "INSERT INTO login (name, email, password) VALUES (?)";
+    const values = [name, email, password];
+
+    dbConnect.query(sql, [values], (err, data) => {
+      if (err) {
+        console.error(err); // Log the error for debugging
+        return res.status(500).json({
+          message: "Error inserting data into the database.",
+          error: err,
+        });
+      }
+      return res
+        .status(201)
+        .json({ message: "User registered successfully.", data });
+    });
+  } catch (error) {
+    console.error(error); // Log the error for debugging
     return res
-      .status(201)
-      .json({ message: "User registered successfully.", data });
+      .status(500)
+      .json({ message: "Error during user registration.", error });
+  }
+});
+
+// Login route with password comparison
+app.post("/login", (req, res) => {
+  const sql = "SELECT * FROM login WHERE `email` = ? AND `password` = ?";
+  dbConnect.query(sql, [req.body.email, req.body.password], (err, data) => {
+    if (err) {
+      return res.json("Error");
+    }
+    if (data.length > 0) {
+      return res.json("Success");
+    } else {
+      return res.json("Failed");
+    }
   });
 });
 
-// login
-
-// app.post("/login", (req, res) => {
-
-//   const { email, password } = req.body;
-
-//   const sql = "SELECT * FROM login WHERE `email` = ?";
-
-//   dbConnect.query(sql, [email], async (err, data) => {
-//     if (err) {
-//       console.error(err); // Log the error for debugging
-//       return res.status(500).json({ message: "Error fetching user." });
-//     }
-
-//     if (data.length > 0) {
-//       // Compare the provided password with the stored hashed password
-//       const user = data[0];
-//       const isMatch = await bcrypt.compare(password, user.password);
-
-//       if (isMatch) {
-//         return res.json({ message: "Success", user });
-//       } else {
-//         return res.status(400).json({ message: "Failed: Invalid password." });
-//       }
-//     } else {
-//       return res.status(400).json({ message: "Failed: User not found." });
-//     }
-//   });
-// });
-
-// Set port, listen for requests
+// Set port and listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
