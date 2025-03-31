@@ -60,7 +60,14 @@ const login = async (req, res) => {
   });
 };
 
+//Log out
+
+const logout = (req, res) => {
+  res.json({ message: "User logged out successfully" });
+};
+
 module.exports = {
   signup,
   login,
+  logout,
 };
