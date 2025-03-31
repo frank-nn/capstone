@@ -5,14 +5,16 @@ let dbConnect = require("./lib/dbConnect");
 const cors = require("cors");
 // const bcrypt = require("bcryptjs"); // Import bcryptjs
 const validator = require("validator"); // Import validator for email validation
+// import userRoutes from "./routes/users.js";  //HELP ?
 
 app.use(express.json());
 app.use(cors()); // Use CORS middleware
-
 // Basic endpoint
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to my MySQL application." });
 });
+
+// app.use("/api/users", userRoutes); // Help!!!
 
 // Signup route with password hashing
 app.post("/signup", async (req, res) => {
