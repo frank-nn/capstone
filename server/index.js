@@ -3,7 +3,7 @@ const app = express();
 require("dotenv").config(); // Make sure to load environment variables from .env
 let dbConnect = require("./lib/dbConnect");
 const cors = require("cors");
-const bcrypt = require("bcryptjs"); // Import bcryptjs
+// const bcrypt = require("bcryptjs"); // Import bcryptjs
 const validator = require("validator"); // Import validator for email validation
 
 app.use(express.json());
@@ -27,7 +27,7 @@ app.post("/signup", async (req, res) => {
     // Hash the password before storing it
     // const hashedPassword = await bcrypt.hash(password, 10);
 
-    const sql = "INSERT INTO login (name, email, password) VALUES (?)";
+    const sql = "INSERT INTO users (name, email, password) VALUES (?)";
     const values = [name, email, password];
 
     dbConnect.query(sql, [values], (err, data) => {
@@ -52,7 +52,7 @@ app.post("/signup", async (req, res) => {
 
 // Login route with password comparison
 app.post("/login", (req, res) => {
-  const sql = "SELECT * FROM login WHERE `email` = ? AND `password` = ?";
+  const sql = "SELECT * FROM users WHERE `email` = ? AND `password` = ?";
   dbConnect.query(sql, [req.body.email, req.body.password], (err, data) => {
     if (err) {
       return res.json("Error");

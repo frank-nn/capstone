@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Validation from "./SignupValidation";
+import Validation from "../Validations/SignupValidation";
 import axios from "axios";
 
 function Signup() {
@@ -58,6 +58,7 @@ function Signup() {
         .then((res) => {
           // Successful signup
           navigate("/"); // Redirect to home or login page
+          alert("Sign-up successful!");
         })
         .catch((err) => {
           console.error(err);
