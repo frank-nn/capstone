@@ -11,7 +11,7 @@ const signup = async (req, res) => {
   }
 
   try {
-    // Directly use the password without hashing (not recommended)
+    // Has to remove password hashing as was complicated (not recommended)
     const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
     const values = [name, email, password]; // No password hashing
 
