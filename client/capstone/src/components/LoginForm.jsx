@@ -9,37 +9,43 @@ function LoginForm() {
     password: "",
   });
 
-  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   // Handle input changes
   const handleInput = (event) => {
     const { name, value } = event.target;
     setValues((prev) => ({
       ...prev,
-      [name]: value, // Directly set value, no need for array
+      [name]: value, // Directly set value
     }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Set errors from validation
-    setErrors(Validation(values));
+    // Validate the form before making API call
+    const validationErrors = Validation(values);
+    setErrors(validationErrors);
 
-    // Check if no errors exist
-    if (errors.email === "" && errors.password === "") {
+    // If no errors, proceed to make the API request
+    if (!validationErrors.email && !validationErrors.password) {
       axios
-        .post("http://localhost:8080/login", values)
+        .post("http://localhost:8080/api/auth/login", values)
         .then((res) => {
+          console.log(res.data);
+
           if (res.data === "Success") {
-            navigate("home"); // Navigate to the home page on success
-          } else {
-            alert("Email or Password Incorrect");
+            navigate("/home"); // Correct the path to "/home" or whatever your home route is
           }
         })
         .catch((err) => {
-          console.error(err); // Log the error if the request fails
+          if (err.response && err.response.status === 401) {
+            alert("Email or Password Incorrect");
+          } else {
+            console.error(err);
+            alert("Email or Password Incorrect.");
+          }
         });
     }
   };
@@ -53,9 +59,9 @@ function LoginForm() {
             <label htmlFor="email">Email</label>
             <input
               type="email"
-              placeholder="Enter Email" // Fixed typo here
+              placeholder="Enter Email"
               name="email"
-              value={values.email} // Binding value to state
+              value={values.email}
               onChange={handleInput}
               className="form-control rounded-0"
             />
@@ -68,9 +74,9 @@ function LoginForm() {
             <label htmlFor="password">Password</label>
             <input
               type="password"
-              placeholder="Enter Password" // Fixed typo here
+              placeholder="Enter Password"
               name="password"
-              value={values.password} // Binding value to state
+              value={values.password}
               onChange={handleInput}
               className="form-control rounded-0"
             />

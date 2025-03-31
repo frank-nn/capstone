@@ -54,7 +54,7 @@ function Signup() {
 
       // Make the API request to the backend
       axios
-        .post("http://localhost:8080/signup", values) // Fixed endpoint to lowercase 'signup'
+        .post("http://localhost:8080/api/auth/signup", values) // Fixed endpoint to lowercase 'signup'
         .then((res) => {
           // Successful signup
           navigate("/"); // Redirect to home or login page
