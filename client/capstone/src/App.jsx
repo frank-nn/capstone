@@ -14,8 +14,8 @@ function App() {
         <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
+        <h1 className="title">FRANKBOOK</h1>
       </div>
-      <h1 className="title">FRANKBOOK</h1>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginForm />} />

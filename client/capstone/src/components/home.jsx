@@ -1,7 +1,5 @@
-import React from "react";
+import Topbar from "./topbar/Topbar";
 
-function home() {
-  return <div>home</div>;
+export default function home() {
+  return <Topbar />;
 }
-
-export default home;
