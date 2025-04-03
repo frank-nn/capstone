@@ -1,5 +1,11 @@
-import Topbar from "./topbar/Topbar";
+import Topbar from "./topbar/Topbar.jsx";
+import Sidebar from "./sidebar/Sidebar.jsx";
 
-export default function home() {
-  return <Topbar />;
+export default function Home() {
+  return (
+    <>
+      <Topbar />
+      <Sidebar />
+    </>
+  );
 }
