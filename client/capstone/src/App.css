@@ -1,0 +1,18 @@
+.title {
+  padding-left: 0px;
+}
+
+.header {
+  display: flex;
+  align-items: center; /* Vertically center the items */
+}
+
+.icon {
+  width: 40px; /* Adjust logo size */
+  height: 40px;
+}
+
+.title {
+  margin-left: 10px; /* Adds space between the logo and title */
+  /* Adjust font size as needed */
+}

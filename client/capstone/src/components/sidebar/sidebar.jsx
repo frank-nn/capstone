@@ -57,7 +57,72 @@ export default function Sidebar() {
         </ul>
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
-        <ul className="sidebarFriendList"></ul>
+        <ul className="sidebarFriendList">
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+          <li className="sidebarFriend">
+            <img className="sidebarFriendImg" src="/assets2/person/2.PNG" />
+            <span className="sidebarFriendName">Jane Doe</span>
+          </li>
+        </ul>
       </div>
     </div>
   );

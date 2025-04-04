@@ -1,5 +1,12 @@
-import "./Feed.css"; // Corrected import
+import "./feed.css"; // Corrected import
+import Share from "../share/Share";
 
 export default function Feed() {
-  return <div className="feed">Feed!!</div>; // Added a class for styling
+  return (
+    <div className="feed">
+      <div className="feedWrapper">
+        <Share />
+      </div>
+    </div>
+  ); // Added a class for styling
 }

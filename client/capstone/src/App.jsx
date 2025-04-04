@@ -9,10 +9,9 @@ import Home from "./components/home.jsx"; // Corrected the import name
 function App() {
   return (
     <>
-      <div>
-        <a></a>
+      <div className="header">
         <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img src={reactLogo} className="icon" alt="React logo" />
         </a>
         <h1 className="title">FRANKBOOK</h1>
       </div>
