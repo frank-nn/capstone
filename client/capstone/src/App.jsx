@@ -5,6 +5,7 @@ import LoginForm from "./components/LoginForm.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "./components/Signup.jsx";
 import Home from "./components/home.jsx"; // Corrected the import name
+import Profile from "./pages/profile/Profile.jsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<LoginForm />} />
           <Route path="/Signup" element={<SignUp />} />
           <Route path="/Home" element={<Home />} /> {/* Fixed the route path */}
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>
