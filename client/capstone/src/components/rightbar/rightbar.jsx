@@ -51,47 +51,6 @@ export default function Rightbar({ profile }) {
             />
             <span className="rightbarFollowingName">John Carter</span>
           </div>
-          <div className="rightbarFollowing">
-            <img
-              src="/assets2/person/1.PNG"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="/assets2/person/1.PNG"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="/assets2/person/1.PNG"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="/assets2/person/1.PNG"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
-
-          <div className="rightbarFollowing">
-            <img
-              src="/assets2/person/1.PNG"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
         </div>
       </>
     );

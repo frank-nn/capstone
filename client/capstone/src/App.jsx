@@ -18,10 +18,11 @@ function App() {
       </div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginForm />} />
+          <Route path="/Login" element={<LoginForm />} />
           <Route path="/Signup" element={<SignUp />} />
-          <Route path="/Home" element={<Home />} /> {/* Fixed the route path */}
-          <Route path="/Profile" element={<Profile />} />
+          <Route exact path="/" element={<Home />} />{" "}
+          {/* Fixed the route path */}
+          <Route path="/Profile/:username" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>
