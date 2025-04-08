@@ -1,13 +1,28 @@
-import "./topbar.css";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
+import "./topbar.css";
 
 export default function Topbar() {
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Manage dropdown state
+  const navigate = useNavigate(); // Hook to navigate between routes
+
+  // Toggle dropdown visibility
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+  // Handle logout (redirects to login page)
+  const handleLogout = () => {
+    console.log("Logging out..."); // Replace with your actual logout logic
+    setDropdownOpen(false); // Close the dropdown after logout
+    navigate("/"); // Navigate to the login page
+  };
+
   return (
     <div className="topbarContailer">
       <div className="topbarLeft">
         <div className="topbarLinks">
           <span className="topbarLink">Homepage</span>
-          <span className="topbarLink">Timeline</span>
+          <span className="topbarLink"></span>
         </div>
       </div>
       <div className="topbarCenter">
@@ -34,8 +49,20 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
-        <h5 ClassName="name">Michael</h5>
-        <img src="/assets2/person/1.PNG" alt="" className="topbarImg" />
+
+        {/* Profile Image (Clickable to toggle dropdown) */}
+        <div className="profileImgContainer" onClick={toggleDropdown}>
+          <img src="/assets2/person/1.PNG" alt="" className="topbarImg" />
+        </div>
+
+        {/* Dropdown Menu */}
+        {dropdownOpen && (
+          <div className="dropdownMenu">
+            <button onClick={handleLogout} className="dropdownItem">
+              Logout
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -138,11 +138,12 @@ function Signup() {
 
           <p></p>
           <Link
-            to="/login"
+            to="/"
             className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none"
           >
             Return To Login
           </Link>
+
           <p></p>
         </form>
       </div>

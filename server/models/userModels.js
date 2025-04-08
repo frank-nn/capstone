@@ -26,31 +26,31 @@ User.init(
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     coverPic: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     profilePic: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     desc: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     followers: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     following: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     from: {
       type: DataTypes.STRING,

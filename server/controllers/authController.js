@@ -1,31 +1,29 @@
 const validator = require("validator");
-const dbConnect = require("../lib/dbConnect");
+const { User } = require("../models"); // adjust path if needed
 
 // Signup controller
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
 
-  // Validate email format
   if (!validator.isEmail(email)) {
     return res.status(400).json({ message: "Invalid email format." });
   }
 
   try {
-    // Has to remove password hashing as was complicated (not recommended)
-    const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-    const values = [name, email, password]; // No password hashing
+    // Check if user already exists
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already registered." });
+    }
 
-    dbConnect.query(sql, values, (err, data) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({
-          message: "Error inserting data into the database.",
-          error: err,
-        });
-      }
-      return res
-        .status(201)
-        .json({ message: "User registered successfully.", data });
+    // Create new user (no password hashing as per your setup)
+    const newUser = await User.create({ name, email, password });
+
+    const { password: _, ...userWithoutPassword } = newUser.dataValues;
+
+    return res.status(201).json({
+      message: "User registered successfully.",
+      user: userWithoutPassword,
     });
   } catch (error) {
     console.error(error);
@@ -39,29 +37,25 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const sql = "SELECT * FROM users WHERE `email` = ?";
-  dbConnect.query(sql, [email], (err, data) => {
-    if (err) {
-      return res.status(500).json({ message: "Database error", error: err });
-    }
+  try {
+    const user = await User.findOne({ where: { email } });
 
-    if (data.length > 0) {
-      const user = data[0];
-
-      // Compare password directly (still not secure)
-      if (password === user.password) {
-        return res.json("Success");
-      } else {
-        return res.status(401).json("Invalid credentials");
-      }
-    } else {
+    if (!user) {
       return res.status(404).json("User not found");
     }
-  });
+
+    if (password === user.password) {
+      return res.json("Success");
+    } else {
+      return res.status(401).json("Invalid credentials");
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Database error", error: err });
+  }
 };
 
-//Log out
-
+// Logout
 const logout = (req, res) => {
   res.json({ message: "User logged out successfully" });
 };

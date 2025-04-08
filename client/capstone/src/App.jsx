@@ -18,10 +18,9 @@ function App() {
       </div>
       <BrowserRouter>
         <Routes>
-          <Route path="/Login" element={<LoginForm />} />
+          <Route path="/" element={<LoginForm />} />
           <Route path="/Signup" element={<SignUp />} />
-          <Route exact path="/" element={<Home />} />{" "}
-          {/* Fixed the route path */}
+          <Route path="/home" element={<Home />} /> {/* Fixed the route path */}
           <Route path="/Profile/:username" element={<Profile />} />
         </Routes>
       </BrowserRouter>

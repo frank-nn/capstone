@@ -36,7 +36,7 @@ function LoginForm() {
           console.log(res.data);
 
           if (res.data === "Success") {
-            navigate("/"); // Correct the path to "home" or whatever your home route is
+            navigate("/home"); // Correct the path to "home" or whatever your home route is
           }
         })
         .catch((err) => {
