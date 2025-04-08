@@ -19,8 +19,8 @@ app.get("/", (req, res) => {
 
 // Use the auth routes
 app.use("/api/auth", authRoutes);
-app.use("/api/user", userRoutes);
-app.use("/api/post", postRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 app.use("/api/comment", commentRoutes);
 app.use("/api/like", likeRoutes);
 
