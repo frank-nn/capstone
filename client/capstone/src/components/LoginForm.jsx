@@ -10,42 +10,32 @@ function LoginForm() {
   });
 
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false); // 👈 New state
   const navigate = useNavigate();
 
-  // Handle input changes
   const handleInput = (event) => {
     const { name, value } = event.target;
     setValues((prev) => ({
       ...prev,
-      [name]: value, // Directly set value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // Validate the form before making API call
     const validationErrors = Validation(values);
     setErrors(validationErrors);
 
-    // If no errors, proceed to make the API request
     if (!validationErrors.email && !validationErrors.password) {
       axios
         .post("http://localhost:8080/api/auth/login", values)
         .then((res) => {
-          console.log(res.data);
-
           if (res.data === "Success") {
-            navigate("/home"); // Correct the path to "home" or whatever your home route is
+            navigate("/home");
           }
         })
         .catch((err) => {
-          if (err.response && err.response.status === 401) {
-            alert("Email or Password Incorrect");
-          } else {
-            console.error(err);
-            alert("Email or Password Incorrect.");
-          }
+          alert("Email or Password Incorrect.");
         });
     }
   };
@@ -72,14 +62,23 @@ function LoginForm() {
 
           <div className="mb-3">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              name="password"
-              value={values.password}
-              onChange={handleInput}
-              className="form-control rounded-0"
-            />
+            <div className="input-group">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter Password"
+                name="password"
+                value={values.password}
+                onChange={handleInput}
+                className="form-control rounded-0"
+              />
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
             {errors.password && (
               <span className="text-danger">{errors.password}</span>
             )}
