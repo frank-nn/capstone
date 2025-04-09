@@ -36,13 +36,6 @@ A social media platform built with a **React frontend** and **Express backend**.
 
 ## Project Setup
 
-### Prerequisites
-
-- Node.js >= 14
-- MySQL Database (Table Plus)
-
-### Installation Steps
-
 FRONTEND
 
 1. open VS code terminal
@@ -56,6 +49,11 @@ BACKEND
 2. cd C:\Users\Thien\OneDrive\Documents\GitHub\capstone\server
 3. npm start
 4. Server is running on port 8080.
+
+### Prerequisites
+
+- Node.js >= 14
+- MySQL Database (Table Plus)
 
 #### 1. Backend Setup
 
