@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<LoginForm />} />
           <Route path="/Signup" element={<SignUp />} />
           <Route path="/home" element={<Home />} /> {/* Fixed the route path */}
-          <Route path="/Profile/:username" element={<Profile />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>

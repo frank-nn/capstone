@@ -21,7 +21,13 @@ export default function Topbar() {
     <div className="topbarContailer">
       <div className="topbarLeft">
         <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
+          <Link to="/home" className="topbarLink">
+            Homepage
+          </Link>
+
+          <Link to="/profile" className="topbarLinks">
+            Profile
+          </Link>
           <span className="topbarLink"></span>
         </div>
       </div>

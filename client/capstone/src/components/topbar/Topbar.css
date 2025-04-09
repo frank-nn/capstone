@@ -96,3 +96,11 @@
   object-fit: cover;
   cursor: pointer;
 }
+
+.topbarLinks {
+  color: cornsilk;
+}
+
+.topbarLink {
+  color: cornsilk;
+}
