@@ -10,7 +10,7 @@ function LoginForm() {
   });
 
   const [errors, setErrors] = useState({});
-  const [showPassword, setShowPassword] = useState(false); // 👈 New state
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleInput = (event) => {
@@ -21,22 +21,34 @@ function LoginForm() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const validationErrors = Validation(values);
     setErrors(validationErrors);
 
     if (!validationErrors.email && !validationErrors.password) {
-      axios
-        .post("http://localhost:8080/api/auth/login", values)
-        .then((res) => {
-          if (res.data === "Success") {
-            navigate("/home");
-          }
-        })
-        .catch((err) => {
-          alert("Email or Password Incorrect.");
-        });
+      try {
+        const res = await axios.post(
+          "http://localhost:8080/api/auth/login",
+          values
+        );
+
+        console.log("Login response:", res.data);
+
+        if (res.data.message === "Login successful") {
+          // Optionally save user info
+          // localStorage.setItem("user", JSON.stringify(res.data.user));
+
+          navigate("/home");
+        } else {
+          alert("Unexpected response from server.");
+        }
+      } catch (err) {
+        const msg =
+          err.response?.data?.message || "Login failed. Please try again.";
+        console.error("Login error:", msg);
+        alert(msg);
+      }
     }
   };
 
