@@ -12,7 +12,8 @@ export default function Topbar() {
 
   // Handle logout (redirects to login page)
   const handleLogout = () => {
-    console.log("Logging out..."); // Replace with your actual logout logic
+    console.log("Logging out...");
+    localStorage.removeItem("token"); //Removes tokens
     setDropdownOpen(false); // Close the dropdown after logout
     navigate("/"); // Navigate to the login page
   };
