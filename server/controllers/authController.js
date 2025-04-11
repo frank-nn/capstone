@@ -70,6 +70,8 @@ const login = async (req, res) => {
     // ✅ Generate token
     const token = generateToken({ id: user.id, email: user.email });
 
+    console.log("Generated JWT Token:", token);
+
     return res.status(200).json({
       message: "Login successful",
       token, // ✅ Send token to frontend
