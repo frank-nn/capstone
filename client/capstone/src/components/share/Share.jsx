@@ -47,7 +47,7 @@ export default function Share() {
   // 🔁 Choose profile image based on user email
   const getProfileImage = (email) => {
     if (email === "frank@email.com") return "/assets2/person/3.jpg";
-    if (email === "chickentest@email.com") return "/assets2/person/1.PNG";
+    if (email === "jack@email.com") return "/assets2/person/1.PNG";
     return "/assets2/person/default.png";
   };
 

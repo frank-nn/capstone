@@ -6,7 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "./components/Signup.jsx";
 import Home from "./components/home.jsx";
 import Profile from "./pages/profile/Profile.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx"; // ✅ import the wrapper
+import ComingSoon from "./pages/ComingSoon.jsx"; // ✅ Import the ComingSoon page
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
           {/* Public routes */}
           <Route path="/" element={<LoginForm />} />
           <Route path="/Signup" element={<SignUp />} />
-
+          <Route path="/comingsoon" element={<ComingSoon />} />{" "}
+          {/* ✅ New route */}
           {/* Protected routes */}
           <Route
             path="/home"

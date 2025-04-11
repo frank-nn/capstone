@@ -22,16 +22,23 @@ export default function Post({ post }) {
   // 🔁 Profile image logic based on email
   const getProfileImage = (email) => {
     if (email === "frank@email.com") return "/assets2/person/3.jpg";
-    if (email === "chickentest@email.com") return "/assets2/person/1.PNG";
+    if (email === "jack@email.com") return "/assets2/person/1.PNG";
     return "/assets2/person/default.png";
   };
 
-  // Use logged-in user's profile image/email/name
+  // 🔁 Post image logic based on logged-in user
+  const getPostImage = (email) => {
+    if (email === "frank@email.com") return "/assets2/post/3.jpg";
+    if (email === "jack@email.com") return "/assets2/post/2.jpg";
+    return "/assets2/post/default.jpg";
+  };
+
+  // Use logged-in user's info
   const profilePicture = getProfileImage(user?.email);
+  const postImage = getPostImage(user?.email);
   const username = user?.name || "Anonymous";
   const date = post?.date || "Unknown date";
   const desc = post?.desc || "No description";
-  const photo = post?.photo || "/assets2/post/1.jpg";
 
   return (
     <div className="post">
@@ -52,7 +59,8 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{desc}</span>
-          <img className="postImg" src={photo} alt="Post" />
+          <img className="postImg" src={postImage} alt="Post" />{" "}
+          {/* 👈 now dynamic */}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

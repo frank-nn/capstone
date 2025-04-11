@@ -30,8 +30,14 @@ export default function Profile() {
   // 🔁 Choose profile image based on email
   const getProfileImage = (email) => {
     if (email === "frank@email.com") return "/assets2/person/3.jpg";
-    if (email === "chickentest@email.com") return "/assets2/person/1.PNG";
-    return "/assets2/person/default.png"; // fallback/default image
+    if (email === "jack@email.com") return "/assets2/person/1.PNG";
+    return "/assets2/person/default.png";
+  };
+
+  // 🔁 Choose cover image based on email
+  const getCoverImage = (email) => {
+    if (email === "jack@email.com") return "/assets2/coverpic.jpeg";
+    return "/assets2/cover.jpg"; // default
   };
 
   return (
@@ -42,7 +48,11 @@ export default function Profile() {
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
-              <img className="profileCoverImg" src="assets2/cover.jpg" alt="" />
+              <img
+                className="profileCoverImg"
+                src={getCoverImage(user?.email)}
+                alt="Cover"
+              />
               <img
                 className="profileUserImg"
                 src={getProfileImage(user?.email)}

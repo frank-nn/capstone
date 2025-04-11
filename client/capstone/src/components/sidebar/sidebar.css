@@ -67,3 +67,8 @@
   object-fit: cover;
   margin-right: 10px;
 }
+
+.sidebarLink {
+  text-decoration: none;
+  color: inherit;
+}
