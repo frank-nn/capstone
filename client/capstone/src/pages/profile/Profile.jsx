@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./profile.css";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/sidebar";
@@ -5,6 +7,26 @@ import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/rightbar";
 
 export default function Profile() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const res = await axios.get("http://localhost:8080/api/users/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(res.data);
+      } catch (err) {
+        console.error("Failed to fetch profile", err);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
   return (
     <>
       <Topbar />
@@ -21,8 +43,10 @@ export default function Profile() {
               />
             </div>
             <div className="profileInfo">
-              <h4 className="profileInfoName">Michael Link</h4>
-              <span className="profileInfoDesc">Hello my friends!</span>
+              <h4 className="profileInfoName">{user?.name || "Loading..."}</h4>
+              <span className="profileInfoDesc">
+                {user ? `Welcome, ${user.email}` : "Fetching your profile..."}
+              </span>
             </div>
           </div>
           <div className="profileRightBottom">

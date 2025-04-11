@@ -1,5 +1,5 @@
 "use strict";
-let Models = require("../models"); // matches index.js
+let Models = require("../models");
 
 // GET all users
 const getUser = async (req, res) => {
@@ -9,6 +9,24 @@ const getUser = async (req, res) => {
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Error fetching users" });
+  }
+};
+
+// GET current user (for /profile)
+const getCurrentUser = async (req, res) => {
+  try {
+    const user = await Models.User.findByPk(req.user.id, {
+      attributes: { exclude: ["password"] },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Fetch current user error:", error);
+    res.status(500).json({ message: "Error fetching user profile" });
   }
 };
 
@@ -59,6 +77,7 @@ const deleteUser = async (req, res) => {
 // ✅ EXPORT ALL
 module.exports = {
   getUser,
+  getCurrentUser,
   createUser,
   updateUser,
   deleteUser,

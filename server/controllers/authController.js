@@ -1,6 +1,7 @@
 const validator = require("validator");
 const bcrypt = require("bcrypt");
-const { User } = require("../models"); // adjust path if needed
+const { User } = require("../models");
+const { generateToken } = require("../lib/jwt"); // ✅ Added JWT import
 
 const SALT_ROUNDS = 10;
 
@@ -58,23 +59,22 @@ const login = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("User found:", user.email);
-    console.log("Entered password:", password);
-    console.log("Hashed password in DB:", user.password);
-
     const isMatch = await bcrypt.compare(password, user.password);
 
-    console.log("Password match:", isMatch);
-
-    if (isMatch) {
-      const { password: _, ...userWithoutPassword } = user.dataValues;
-      return res.status(200).json({
-        message: "Login successful",
-        user: userWithoutPassword,
-      });
-    } else {
+    if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
+
+    const { password: _, ...userWithoutPassword } = user.dataValues;
+
+    // ✅ Generate token
+    const token = generateToken({ id: user.id, email: user.email });
+
+    return res.status(200).json({
+      message: "Login successful",
+      token, // ✅ Send token to frontend
+      user: userWithoutPassword,
+    });
   } catch (err) {
     console.error("Login error:", err);
     return res.status(500).json({ message: "Database error", error: err });

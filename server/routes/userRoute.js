@@ -1,16 +1,23 @@
+// server/routes/userRoute.js
 const express = require("express");
 const router = express.Router();
+const authenticateToken = require("../middleware/authMiddleware");
 
 const {
   getUser,
   createUser,
   updateUser,
   deleteUser,
-} = require("../controllers/userController"); // ✅ Correct path and name
+  getCurrentUser,
+} = require("../controllers/userController");
 
-router.get("/", getUser);
+// Public routes
 router.post("/", createUser);
-router.put("/:id", updateUser);
-router.delete("/:id", deleteUser);
+
+// Protected routes
+router.get("/", authenticateToken, getUser);
+router.get("/profile", authenticateToken, getCurrentUser);
+router.put("/:id", authenticateToken, updateUser);
+router.delete("/:id", authenticateToken, deleteUser);
 
 module.exports = router;
