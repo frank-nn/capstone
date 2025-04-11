@@ -1,28 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
 import "./topbar.css";
 
 export default function Topbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   const handleLogout = () => {
-    // 🔍 Log token before removing
-    const tokenBefore = localStorage.getItem("token");
-    console.log("Token before logout:", tokenBefore);
-
-    // 🧹 Remove token
+    console.log("Token before logout:", localStorage.getItem("token"));
     localStorage.removeItem("token");
-
-    // ✅ Confirm removal
-    const tokenAfter = localStorage.getItem("token");
-    console.log("Token after logout (should be null):", tokenAfter);
-
+    localStorage.removeItem("user");
+    console.log("Token after logout:", localStorage.getItem("token"));
     setDropdownOpen(false);
-    navigate("/"); // Redirect to login page
+    navigate("/");
+  };
+
+  // 🔁 Choose profile image based on email
+  const getProfileImage = (email) => {
+    if (email === "frank@email.com") return "/assets2/person/3.jpg";
+    if (email === "chickentest@email.com") return "/assets2/person/1.PNG";
+    return "/assets2/person/default.png";
   };
 
   return (
@@ -39,15 +47,17 @@ export default function Topbar() {
           <span className="topbarLink"></span>
         </div>
       </div>
+
       <div className="topbarCenter">
         <div className="searchbar">
           <Search className="searchIcon" />
           <input
             placeholder="Search for friend, post or video"
             className="searchInput"
-          ></input>
+          />
         </div>
       </div>
+
       <div className="topbarRight">
         <div className="topbarIcons">
           <div className="topbarIconItem">
@@ -64,10 +74,16 @@ export default function Topbar() {
           </div>
         </div>
 
+        {/* 🔥 Dynamic Profile Image */}
         <div className="profileImgContainer" onClick={toggleDropdown}>
-          <img src="/assets2/person/1.PNG" alt="" className="topbarImg" />
+          <img
+            src={getProfileImage(user?.email)}
+            alt="Profile"
+            className="topbarImg"
+          />
         </div>
 
+        {/* Dropdown Menu */}
         {dropdownOpen && (
           <div className="dropdownMenu">
             <button onClick={handleLogout} className="dropdownItem">

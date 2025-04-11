@@ -1,28 +1,37 @@
 import "./post.css";
 import { MoreVert } from "@mui/icons-material";
-import { Users } from "/dummyData"; // Assuming Users is imported correctly
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Post({ post }) {
-  console.log(post);
-  // Check if the post is defined, and set like to 0 if undefined
   const [like, setLike] = useState(post?.like || 0);
   const [isLiked, setIsLiked] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
 
-  // Find the user data using `.find()` for better performance and readability
-  const user = Users.find((u) => u.id === post?.userId);
+  // 🔁 Profile image logic based on email
+  const getProfileImage = (email) => {
+    if (email === "frank@email.com") return "/assets2/person/3.jpg";
+    if (email === "chickentest@email.com") return "/assets2/person/1.PNG";
+    return "/assets2/person/default.png";
+  };
 
-  // Fallback if the user or post data doesn't exist
-  const profilePicture = user?.profilePicture || "/assets2/person/1.PNG"; // Default profile image
-  const username = user?.username || "Anonymous"; // Fallback username
-  const date = post?.date || "Unknown date"; // Fallback date
-  const desc = post?.desc || "No description"; // Fallback description
-  const photo = post?.photo || "/assets2/post/1.jpg"; // Fallback image
+  // Use logged-in user's profile image/email/name
+  const profilePicture = getProfileImage(user?.email);
+  const username = user?.name || "Anonymous";
+  const date = post?.date || "Unknown date";
+  const desc = post?.desc || "No description";
+  const photo = post?.photo || "/assets2/post/1.jpg";
 
   return (
     <div className="post">

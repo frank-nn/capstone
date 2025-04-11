@@ -1,16 +1,24 @@
 import "./share.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { PermMedia, Label, Room, EmojiEmotions } from "@mui/icons-material";
 
 export default function Share() {
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const handlePost = async () => {
     if (!desc.trim() && !file) return;
 
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("token"); // make sure key matches your app
     const formData = new FormData();
 
     formData.append("desc", desc);
@@ -36,11 +44,22 @@ export default function Share() {
     }
   };
 
+  // 🔁 Choose profile image based on user email
+  const getProfileImage = (email) => {
+    if (email === "frank@email.com") return "/assets2/person/3.jpg";
+    if (email === "chickentest@email.com") return "/assets2/person/1.PNG";
+    return "/assets2/person/default.png";
+  };
+
   return (
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img className="shareProfileImg" src="/assets2/person/1.PNG" alt="" />
+          <img
+            className="shareProfileImg"
+            src={getProfileImage(user?.email)}
+            alt="Profile"
+          />
           <input
             placeholder="What's in your mind mate?"
             className="shareInput"

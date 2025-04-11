@@ -39,7 +39,8 @@ function LoginForm() {
           // Optionally save user info
           // localStorage.setItem("user", JSON.stringify(res.data.user));
           localStorage.setItem("token", res.data.token);
-
+          localStorage.setItem("user", JSON.stringify(res.data.user)); // ✅ save user
+          console.log("Login response:", res.data);
           navigate("/home");
         } else {
           alert("Unexpected response from server.");
