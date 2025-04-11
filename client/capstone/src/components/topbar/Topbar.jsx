@@ -1,21 +1,28 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { Link, useNavigate } from "react-router-dom";
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
 import "./topbar.css";
 
 export default function Topbar() {
-  const [dropdownOpen, setDropdownOpen] = useState(false); // Manage dropdown state
-  const navigate = useNavigate(); // Hook to navigate between routes
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Toggle dropdown visibility
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
-  // Handle logout (redirects to login page)
   const handleLogout = () => {
-    console.log("Logging out...");
-    localStorage.removeItem("token"); //Removes tokens
-    setDropdownOpen(false); // Close the dropdown after logout
-    navigate("/"); // Navigate to the login page
+    // 🔍 Log token before removing
+    const tokenBefore = localStorage.getItem("token");
+    console.log("Token before logout:", tokenBefore);
+
+    // 🧹 Remove token
+    localStorage.removeItem("token");
+
+    // ✅ Confirm removal
+    const tokenAfter = localStorage.getItem("token");
+    console.log("Token after logout (should be null):", tokenAfter);
+
+    setDropdownOpen(false);
+    navigate("/"); // Redirect to login page
   };
 
   return (
@@ -57,12 +64,10 @@ export default function Topbar() {
           </div>
         </div>
 
-        {/* Profile Image (Clickable to toggle dropdown) */}
         <div className="profileImgContainer" onClick={toggleDropdown}>
           <img src="/assets2/person/1.PNG" alt="" className="topbarImg" />
         </div>
 
-        {/* Dropdown Menu */}
         {dropdownOpen && (
           <div className="dropdownMenu">
             <button onClick={handleLogout} className="dropdownItem">

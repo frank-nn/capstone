@@ -4,8 +4,9 @@ import "./App.css";
 import LoginForm from "./components/LoginForm.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "./components/Signup.jsx";
-import Home from "./components/home.jsx"; // Corrected the import name
+import Home from "./components/home.jsx";
 import Profile from "./pages/profile/Profile.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx"; // ✅ import the wrapper
 
 function App() {
   return (
@@ -16,12 +17,30 @@ function App() {
         </a>
         <h1 className="title">FRANKBOOK</h1>
       </div>
+
       <BrowserRouter>
         <Routes>
+          {/* Public routes */}
           <Route path="/" element={<LoginForm />} />
           <Route path="/Signup" element={<SignUp />} />
-          <Route path="/home" element={<Home />} /> {/* Fixed the route path */}
-          <Route path="/Profile" element={<Profile />} />
+
+          {/* Protected routes */}
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/Profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>

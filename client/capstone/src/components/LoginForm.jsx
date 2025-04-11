@@ -38,6 +38,7 @@ function LoginForm() {
         if (res.data.message === "Login successful") {
           // Optionally save user info
           // localStorage.setItem("user", JSON.stringify(res.data.user));
+          localStorage.setItem("token", res.data.token);
 
           navigate("/home");
         } else {
