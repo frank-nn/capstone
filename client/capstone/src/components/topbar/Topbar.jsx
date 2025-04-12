@@ -41,7 +41,7 @@ export default function Topbar() {
             Homepage
           </Link>
 
-          <Link to="/profile" className="topbarLinks">
+          <Link to="/profile" className="topbarLink">
             Profile
           </Link>
           <span className="topbarLink"></span>
@@ -60,18 +60,18 @@ export default function Topbar() {
 
       <div className="topbarRight">
         <div className="topbarIcons">
-          <div className="topbarIconItem">
+          <Link to="/comingsoon" className="topbarIconItem">
             <Person />
             <span className="topbarIconBadge">1</span>
-          </div>
-          <div className="topbarIconItem">
+          </Link>
+          <Link to="/comingsoon" className="topbarIconItem">
             <Chat />
             <span className="topbarIconBadge">2</span>
-          </div>
-          <div className="topbarIconItem">
+          </Link>
+          <Link to="/comingsoon" className="topbarIconItem">
             <Notifications />
             <span className="topbarIconBadge">1</span>
-          </div>
+          </Link>
         </div>
 
         {/* 🔥 Dynamic Profile Image */}

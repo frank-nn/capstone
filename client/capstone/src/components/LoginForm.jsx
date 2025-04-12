@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Validation from "../Validations/LoginValidation";
 import axios from "axios";
@@ -12,6 +12,14 @@ function LoginForm() {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  // ✅ Redirect to /home if token exists
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -36,11 +44,8 @@ function LoginForm() {
         console.log("Login response:", res.data);
 
         if (res.data.message === "Login successful") {
-          // Optionally save user info
-          // localStorage.setItem("user", JSON.stringify(res.data.user));
           localStorage.setItem("token", res.data.token);
-          localStorage.setItem("user", JSON.stringify(res.data.user)); // ✅ save user
-          console.log("Login response:", res.data);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
           navigate("/home");
         } else {
           alert("Unexpected response from server.");

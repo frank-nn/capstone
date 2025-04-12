@@ -104,3 +104,30 @@
 .topbarLink {
   color: cornsilk;
 }
+
+.topbarIconItem {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.topbarIconItem:focus,
+.topbarIconItem:active {
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.topbarIconItem:focus-visible {
+  outline: none;
+}
+
+.topbarIconItem:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* optional hover effect */
+}
